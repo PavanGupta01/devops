@@ -1,7 +1,10 @@
 # run.sh will launch python docker containers in one go
 
 # Ubuntu 12 
+docker run -itdp 1226:22 u12_py269
 docker run -itdp 1227:22 u12_py273
+docker run -itdp 1234:22 u12_py34
+docker run -itdp 1235:22 u12_py35
 
 # Ubuntu 14
 docker run -itdp 1426:22 u14_py269
