@@ -1,0 +1,30 @@
+FROM c7_core
+MAINTAINER Pavan Gupta <pavan.gupta@gslab.com>
+
+RUN	wget https://www.python.org/ftp/python/2.6.9/Python-2.6.9.tar.xz && \
+	tar -xvf Python-2.6.9.tar.xz && \
+	cd Python-2.6.9 && \
+	./configure && \
+	make && \
+	make install && \
+	cd ..
+
+#------------------------------------------------------------------------------
+# Install pip
+#------------------------------------------------------------------------------
+RUN 	wget https://bootstrap.pypa.io/get-pip.py && \
+	/usr/local/bin/python2.6 get-pip.py
+
+#------------------------------------------------------------------------------
+# Pip install packages
+#------------------------------------------------------------------------------
+RUN 	pip install pytest
+
+#------------------------------------------------------------------------------
+# Redirecting to default python
+#------------------------------------------------------------------------------
+RUN 	cp /usr/bin/python /usr/bin/pythonback && \
+	rm -rf /usr/bin/python && \
+	ln -s /usr/local/bin/python2.6 /usr/bin/python
+
+RUN sed -i 's/port 9918/port 9930/' /etc/aerospike/aerospike.conf

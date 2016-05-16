@@ -1,0 +1,23 @@
+FROM u12_core
+MAINTAINER Pavan Gupta <pavan.gupta@gslab.com>
+
+RUN apt-get update
+RUN apt-get install -y autoconf
+RUN apt-get install -y libssl-dev
+
+#------------------------------------------------------------------------------
+# Build PHP From Source
+#------------------------------------------------------------------------------
+ENV PHP_VERSION 5.5.30
+RUN apt-get install -y libxml2-dev
+RUN wget -O php-${PHP_VERSION}.tar.gz http://us.php.net/get/php-${PHP_VERSION}.tar.gz/from/this/mirror && \
+	tar -zxvf php-${PHP_VERSION}.tar.gz && \
+	cd php-${PHP_VERSION} && \
+	./configure --enable-debug && \
+	make && \
+	make install && \
+	cp php.ini-development /usr/local/lib/php.ini
+
+RUN echo "extension=/root/jenkins_work/workspace/php_conn_ubuntu/src/aerospike/modules/aerospike.so" >> /usr/local/lib/php.ini
+
+RUN sed -i 's/port 9918/port 9802/' /etc/aerospike/aerospike.conf

@@ -1,0 +1,21 @@
+FROM c6_core
+MAINTAINER Pavan Gupta <pavan.gupta@gslab.com>
+
+RUN yum install -y autoconf
+
+#------------------------------------------------------------------------------
+# Build PHP From Source
+#------------------------------------------------------------------------------
+ENV PHP_VERSION 5.4.45
+RUN yum install -y libxml2-devel
+RUN wget -O php-${PHP_VERSION}.tar.gz http://us.php.net/get/php-${PHP_VERSION}.tar.gz/from/this/mirror && \
+	tar -zxvf php-${PHP_VERSION}.tar.gz && \
+	cd php-${PHP_VERSION} && \
+	./configure --enable-debug && \
+	make && \
+	make install && \
+	cp php.ini-development /usr/local/lib/php.ini
+
+RUN echo "extension=/root/jenkins_work/workspace/php_conn_ubuntu/src/aerospike/modules/aerospike.so" >> /usr/local/lib/php.ini
+
+RUN sed -i 's/port 9918/port 9821/' /etc/aerospike/aerospike.conf

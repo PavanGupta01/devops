@@ -1,0 +1,393 @@
+Sending build context to Docker daemon 40.45 kB
+Step 1 : FROM ubuntu:14.04
+ ---> 14b59d36bae0
+Step 2 : MAINTAINER Pavan Gupta <pavan.gupta@gslab.com>
+ ---> Using cache
+ ---> 80883aa472d6
+Step 3 : LABEL description "This image can be used as ubuntu-14 base for aerospike python and php connectors"
+ ---> Using cache
+ ---> 1e6cc0f056ec
+Step 4 : RUN apt-get update
+ ---> Using cache
+ ---> e4ded194d13c
+Step 5 : RUN apt-get install -y openjdk-7-jdk
+ ---> Using cache
+ ---> f358270e3e5c
+Step 6 : RUN apt-get install -y openssh-server
+ ---> Using cache
+ ---> 17092515acba
+Step 7 : RUN apt-get install -y git-core
+ ---> Using cache
+ ---> bd547baa4b7d
+Step 8 : RUN apt-get install -y build-essential
+ ---> Using cache
+ ---> f0374b8c031a
+Step 9 : RUN apt-get install -y libssl-dev
+ ---> Using cache
+ ---> 357f4196d9c1
+Step 10 : RUN mkdir /var/run/sshd
+ ---> Using cache
+ ---> f9aeff6a32a0
+Step 11 : RUN echo 'root:root' | chpasswd
+ ---> Using cache
+ ---> 4c51a354b7d6
+Step 12 : RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+ ---> Using cache
+ ---> 866ccea95be7
+Step 13 : RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+ ---> Using cache
+ ---> a56ef143e0d3
+Step 14 : RUN wget -O aerospike.tgz 'http://aerospike.com/download/server/latest/artifact/ubuntu12'
+ ---> Using cache
+ ---> 3e8233700b83
+Step 15 : RUN tar -xvf aerospike.tgz
+ ---> Using cache
+ ---> 0b58ea5c7b82
+Step 16 : RUN dpkg -i aerospike-server-community-*/*.deb
+ ---> Using cache
+ ---> 0d5b06c793b7
+Step 17 : COPY aerospike.conf /etc/aerospike/
+ ---> Using cache
+ ---> eae21738e155
+Step 18 : EXPOSE 22 3000 3001 3002 3003
+ ---> Using cache
+ ---> 846efd377171
+Step 19 : CMD /usr/sbin/sshd -D
+ ---> Using cache
+ ---> 9e8b7cb32621
+Successfully built 9e8b7cb32621
+Sending build context to Docker daemon  42.5 kB
+Step 1 : FROM ubuntu:12.04
+ ---> eb965dfb09d2
+Step 2 : MAINTAINER Pavan Gupta <pavan.gupta@gslab.com>
+ ---> Using cache
+ ---> 6d6ab2a4bda9
+Step 3 : RUN apt-get update
+ ---> Using cache
+ ---> 84a2b02fee52
+Step 4 : RUN apt-get install -y openjdk-7-jdk
+ ---> Using cache
+ ---> f301418fdce8
+Step 5 : RUN apt-get install -y openssh-server
+ ---> Using cache
+ ---> f9ee3b369123
+Step 6 : RUN apt-get install -y git-core
+ ---> Using cache
+ ---> b73f14a5fbae
+Step 7 : RUN apt-get install -y build-essential
+ ---> Using cache
+ ---> 24114433eaf5
+Step 8 : RUN apt-get install -y logrotate
+ ---> Using cache
+ ---> 022988d22aed
+Step 9 : RUN apt-get install -y lsb-release
+ ---> Using cache
+ ---> c7ca294b49ec
+Step 10 : RUN mkdir /var/run/sshd
+ ---> Using cache
+ ---> 04015f0ad7c7
+Step 11 : RUN echo 'root:root' | chpasswd
+ ---> Using cache
+ ---> b113f1b2c27c
+Step 12 : RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+ ---> Using cache
+ ---> d19d9f2203f3
+Step 13 : RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+ ---> Using cache
+ ---> 44589b866733
+Step 14 : RUN wget -O aerospike.tgz 'http://aerospike.com/download/server/latest/artifact/ubuntu12'
+ ---> Using cache
+ ---> 0a56decb1e1d
+Step 15 : RUN tar -xvf aerospike.tgz
+ ---> Using cache
+ ---> cb9ebc55f69c
+Step 16 : RUN dpkg -i aerospike-server-community-*/*.deb
+ ---> Using cache
+ ---> 02610bada060
+Step 17 : COPY aerospike.conf /etc/aerospike/
+ ---> Using cache
+ ---> 4d2003e7f0e3
+Step 18 : EXPOSE 22 3000 3001 3002 3003
+ ---> Using cache
+ ---> 2eab37734ab0
+Step 19 : CMD /usr/sbin/sshd -D
+ ---> Using cache
+ ---> 79b031151283
+Successfully built 79b031151283
+Sending build context to Docker daemon 44.03 kB
+Step 1 : FROM centos:centos6
+ ---> 2e4f3f04a056
+Step 2 : MAINTAINER Pavan Gupta <pavan.gupta@gslab.com>
+ ---> Using cache
+ ---> 63aee2c037b2
+Step 3 : LABEL description "This image can be used as centos-6 base for aerospike python and php connectors"
+ ---> Using cache
+ ---> 3275206b2966
+Step 4 : RUN yum -y update; yum clean all
+ ---> Using cache
+ ---> a76e7a7d0ee7
+Step 5 : RUN yum -y install which
+ ---> Using cache
+ ---> 7df4b1f4d6e9
+Step 6 : RUN yum -y install epel-release
+ ---> Using cache
+ ---> a2696f9bd73d
+Step 7 : RUN yum -y install openssh-server
+ ---> Using cache
+ ---> f5de819a4383
+Step 8 : RUN yum -y install passwd
+ ---> Using cache
+ ---> 6fc31275960a
+Step 9 : RUN yum -y install openssl-devel
+ ---> Using cache
+ ---> b6cf4a524685
+Step 10 : RUN yum -y install wget
+ ---> Using cache
+ ---> 98ab455e92b5
+Step 11 : RUN yum -y install gcc gcc-c++ kernel-devel make
+ ---> Using cache
+ ---> 1dcac55e5bbb
+Step 12 : RUN yum -y install java-1.7.0-openjdk java-1.7.0-openjdk-devel
+ ---> Using cache
+ ---> 5f82538aa5b7
+Step 13 : RUN rm -f /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_rsa_key &&     ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_ecdsa_key &&     ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key
+ ---> Using cache
+ ---> e963ed936673
+Step 14 : RUN yum install -y curl-devel expat-devel gettext-devel zlib-devel
+ ---> Using cache
+ ---> 55dae312df1d
+Step 15 : RUN yum install -y perl-ExtUtils-MakeMaker
+ ---> Using cache
+ ---> 92b07149b454
+Step 16 : RUN wget https://www.kernel.org/pub/software/scm/git/git-2.0.4.tar.gz
+ ---> Using cache
+ ---> 7a3f512dbaba
+Step 17 : RUN tar xzf git-2.0.4.tar.gz
+ ---> Using cache
+ ---> 18283b08c538
+Step 18 : WORKDIR /git-2.0.4
+ ---> Using cache
+ ---> 4dc86b39e10c
+Step 19 : RUN echo $(pwd)
+ ---> Using cache
+ ---> 7f8ef01e0d86
+Step 20 : RUN make prefix=/usr/local/git all
+ ---> Using cache
+ ---> db1bccdd52c8
+Step 21 : WORKDIR /git-2.0.4
+ ---> Using cache
+ ---> 01447026ae23
+Step 22 : RUN make prefix=/usr/local/git install
+ ---> Using cache
+ ---> aa8a4b449c6e
+Step 23 : RUN echo 'export PATH=$PATH:/usr/local/git/bin' >> /etc/bashrc
+ ---> Using cache
+ ---> a330acf54bcd
+Step 24 : RUN source /etc/bashrc
+ ---> Using cache
+ ---> 1a7df41a116e
+Step 25 : RUN echo "root:root" | chpasswd
+ ---> Using cache
+ ---> 48296fd8ae3c
+Step 26 : ENV AEROSPIKE_VERSION 3.7.3
+ ---> Using cache
+ ---> b3ae95bd7cb1
+Step 27 : ENV PLATFORM el7
+ ---> Using cache
+ ---> 47ba54c6e585
+Step 28 : RUN wget -O aerospike.tgz 'http://aerospike.com/download/server/latest/artifact/el6'
+ ---> Using cache
+ ---> 4a839668bccb
+Step 29 : RUN tar -xvf aerospike.tgz
+ ---> Using cache
+ ---> 84c45f4e1a58
+Step 30 : RUN rpm -ivh aerospike-server-community*/aerospike*.rpm
+ ---> Using cache
+ ---> b553713d1a1c
+Step 31 : COPY aerospike.conf /etc/aerospike/
+ ---> Using cache
+ ---> c72ffe9c0f08
+Step 32 : EXPOSE 22 3000 3001 3002 3003
+ ---> Using cache
+ ---> 7e1268854659
+Step 33 : CMD exec /usr/sbin/sshd -D
+ ---> Using cache
+ ---> 38efc533fc2b
+Successfully built 38efc533fc2b
+Sending build context to Docker daemon  47.1 kB
+Step 1 : FROM centos:centos7
+ ---> 0f0be3675ebb
+Step 2 : MAINTAINER Pavan Gupta <pavan.gupta@gslab.com>
+ ---> Using cache
+ ---> b3a19efc5eca
+Step 3 : LABEL description "This image can be used as centos-7 base for aerospike python and php connectors"
+ ---> Using cache
+ ---> 18ada4a71ced
+Step 4 : RUN yum -y update; yum clean all
+ ---> Using cache
+ ---> add312cc839f
+Step 5 : RUN yum -y install java-1.7.0-openjdk-devel.x86_64
+ ---> Using cache
+ ---> f5ec596c08ed
+Step 6 : RUN yum -y install which
+ ---> Using cache
+ ---> d7cfd0a79122
+Step 7 : RUN yum -y install epel-release
+ ---> Using cache
+ ---> 2db972715fa3
+Step 8 : RUN yum -y install openssh-server
+ ---> Using cache
+ ---> bf4cebdd2486
+Step 9 : RUN yum -y install passwd
+ ---> Using cache
+ ---> 1fd19d7abd79
+Step 10 : RUN yum -y install openssl-devel
+ ---> Using cache
+ ---> 2c7d4364d335
+Step 11 : RUN yum -y install wget
+ ---> Using cache
+ ---> a238156c332b
+Step 12 : RUN yum -y install git
+ ---> Using cache
+ ---> d99000acd88f
+Step 13 : RUN yum -y install gcc gcc-c++ kernel-devel make
+ ---> Using cache
+ ---> b3bdbfd92838
+Step 14 : RUN rm -f /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_rsa_key &&     ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_ecdsa_key &&     ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key
+ ---> Using cache
+ ---> 2c1782d32d99
+Step 15 : RUN echo "root:root" | chpasswd
+ ---> Using cache
+ ---> 9646e222f9d1
+Step 16 : ENV AEROSPIKE_VERSION 3.7.3
+ ---> Using cache
+ ---> a8635bbb9c5c
+Step 17 : ENV PLATFORM el7
+ ---> Using cache
+ ---> 7718344e8cb0
+Step 18 : RUN wget -O aerospike.tgz 'http://aerospike.com/download/server/latest/artifact/el6'
+ ---> Using cache
+ ---> 386945c49b0c
+Step 19 : RUN tar -xvf aerospike.tgz
+ ---> Using cache
+ ---> 782ee4a4834a
+Step 20 : RUN rpm -ivh aerospike-server-community*/aerospike*.rpm
+ ---> Using cache
+ ---> 3b308fac906f
+Step 21 : COPY aerospike.conf /etc/aerospike/
+ ---> Using cache
+ ---> 6d13ac59f238
+Step 22 : EXPOSE 22 3000 3001 3002 3003
+ ---> Using cache
+ ---> 9c65c82f4792
+Step 23 : CMD exec /usr/sbin/sshd -D
+ ---> Using cache
+ ---> 2a6378d5704e
+Successfully built 2a6378d5704e
+=======>       Hurray! Done with core images        <==========
+Sending build context to Docker daemon 49.66 kB
+Step 1 : FROM u14_core
+ ---> 9e8b7cb32621
+Step 2 : MAINTAINER Pavan Gupta <pavan.gupta@gslab.com>
+ ---> Using cache
+ ---> 940aacf6d82c
+Step 3 : RUN apt-get update
+ ---> Using cache
+ ---> 5c14ae2af5f2
+Step 4 : RUN apt-get install -y python-dev
+ ---> Using cache
+ ---> 6cea16fc830c
+Step 5 : RUN apt-get install -y python-pip
+ ---> Using cache
+ ---> 689d0fa2df50
+Step 6 : RUN apt-get install -y libssl-dev
+ ---> Using cache
+ ---> 824d0f36ed64
+Step 7 : RUN pip install pytest
+ ---> Using cache
+ ---> c7416744bc47
+Successfully built c7416744bc47
+Sending build context to Docker daemon 50.18 kB
+Step 1 : FROM u14_core
+ ---> 9e8b7cb32621
+Step 2 : MAINTAINER Pavan Gupta <pavan.gupta@gslab.com>
+ ---> Using cache
+ ---> 940aacf6d82c
+Step 3 : RUN apt-get install -y python-software-properties && 	apt-get install -y software-properties-common && 	add-apt-repository -y ppa:fkrull/deadsnakes && 	apt-get update && 	apt-get install -y python3.5 python3.5-dev
+ ---> Using cache
+ ---> a95534f6365c
+Step 4 : RUN apt-get install -y libssl-dev
+ ---> Using cache
+ ---> 72286b7f396c
+Step 5 : RUN wget https://bootstrap.pypa.io/get-pip.py && 	python3.5 get-pip.py
+ ---> Using cache
+ ---> 76d84a3b613f
+Step 6 : RUN pip install pytest
+ ---> Using cache
+ ---> 8970591e9b7f
+Step 7 : RUN cp /usr/bin/python /usr/bin/oldpython && 	rm -rf /usr/bin/python && 	ln -s /usr/bin/python3.5 /usr/bin/python
+ ---> Using cache
+ ---> ae401e976d8e
+Successfully built ae401e976d8e
+Sending build context to Docker daemon  51.2 kB
+Step 1 : FROM u14_core
+ ---> 9e8b7cb32621
+Step 2 : MAINTAINER Pavan Gupta <pavan.gupta@gslab.com>
+ ---> Using cache
+ ---> 940aacf6d82c
+Step 3 : RUN apt-get install -y python3.4-dev && 	apt-get install -y python3-setuptools && 	easy_install3 pip
+ ---> Using cache
+ ---> c1d5e38d012c
+Step 4 : RUN apt-get install -y libssl-dev
+ ---> Using cache
+ ---> c507e12ae993
+Step 5 : RUN pip install pytest
+ ---> Using cache
+ ---> 892363f6ccd2
+Step 6 : RUN cp /usr/bin/python /usr/bin/oldpython && 	rm -rf /usr/bin/python && 	ln -s /usr/bin/python3 /usr/bin/python
+ ---> Using cache
+ ---> 17857a9f198e
+Successfully built 17857a9f198e
+unable to prepare context: unable to evaluate symlinks in Dockerfile path: lstat /home/gslab/projects/pyUtils/devops/docker/u14_py269: no such file or directory
+Hurray! Done with ubuntu14 Python images-----------------------------
+Sending build context to Docker daemon 51.71 kB
+Step 1 : FROM u14_core
+ ---> 9e8b7cb32621
+Step 2 : MAINTAINER Pavan Gupta <pavan.gupta@gslab.com>
+ ---> Using cache
+ ---> 940aacf6d82c
+Step 3 : RUN apt-get install -y autoconf libssl-dev
+ ---> Using cache
+ ---> e2b447fc89ba
+Step 4 : RUN apt-get install -y libxml2-dev
+ ---> Using cache
+ ---> b6c002c8eff6
+Step 5 : RUN wget -O php-5.5.14.tar.gz http://us.php.net/get/php-5.5.14.tar.gz/from/this/mirror && 	tar -zxvf php-5.5.14.tar.gz && 	cd php-5.5.14 && 	./configure --enable-debug && 	make && 	make install && 	cp php.ini-development /usr/local/lib/php.ini
+ ---> Using cache
+ ---> 0a3a6234dc61
+Step 6 : RUN echo "extension=/root/aerospike-client-php/src/aerospike/modules/aerospike.so" >> /usr/local/lib/php.ini
+ ---> Using cache
+ ---> 0106694346ad
+Successfully built 0106694346ad
+Hurray! Done with ubuntu14 PHP images-----------------------------
+Sending build context to Docker daemon 52.74 kB
+Step 1 : FROM u12_core
+ ---> 79b031151283
+Step 2 : MAINTAINER Pavan Gupta <pavan.gupta@gslab.com>
+ ---> Using cache
+ ---> 82713f03bd4c
+Step 3 : RUN apt-get install -y python-pip && 	apt-get install -y python-dev && 	apt-get install -y libssl-dev
+ ---> Running in 8fbec3a395fd
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following extra packages will be installed:
+  python-pkg-resources python-setuptools
+Suggested packages:
+  python-distribute python-distribute-doc
+The following NEW packages will be installed:
+  python-pip python-pkg-resources python-setuptools
+0 upgraded, 3 newly installed, 0 to remove and 1 not upgraded.
+Need to get 599 kB of archives.
+After this operation, 1647 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu/ precise/main python-pkg-resources all 0.6.24-1ubuntu1 [63.1 kB]
