@@ -56,29 +56,28 @@ PyCharm as an editor is highly recommended. Get one from https://www.jetbrains.c
 ## Steps To Configure On Ubuntu/Debian
 
    1. Install Python3-dev dependencies 
-      *sudo apt-get install python3-dev libxml2-dev libxslt1-dev*
+      `sudo apt-get install python3-dev libxml2-dev libxslt1-dev`
 
    2. Install Mysql
-      *sudo apt-get install mysql-server-5.6*
+      `sudo apt-get install mysql-server-5.6`
 
    3. Install RabbitMQ(https://www.rabbitmq.com/install-debian.html)
-      *wget -O- https://www.rabbitmq.com/rabbitmq-signing-key-public.asc | sudo apt-key add -*
-      *sudo apt-get update*
-      *sudo apt-get install rabbitmq-server*
+      `wget -O- https://www.rabbitmq.com/rabbitmq-signing-key-public.asc | sudo apt-key add -`
+      `sudo apt-get update`
+      `sudo apt-get install rabbitmq-server`
 
    4. Install Redis Server
-      *sudo apt-get install redis-server*
+      `sudo apt-get install redis-server`
 
    5. Install elasticsearch 1.4.4 or above
-      *add-apt-repository -y ppa:webupd8team/java*
-      *apt-get update*
-      *apt-get install oracle-java8-installer*
+      `add-apt-repository -y ppa:webupd8team/java`
+      `apt-get update`
+      `apt-get install oracle-java8-installer`
     
-      *wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -*
-      *echo "deb http://packages.elastic.co/elasticsearch/1.7/debian stable main" | sudo tee -a* */etc/apt/sources.list.d/elasticsearch-1.7.list*
-      *apt-get update*
-      *apt-get install elasticsearch*
-
+      `wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -`
+      `echo "deb http://packages.elastic.co/elasticsearch/1.7/debian stable main" | sudo tee -a` `/etc/apt/sources.list.d/elasticsearch-1.7.list`
+      `apt-get update`
+      `apt-get install elasticsearch`
 
 #############################################
 #############################################
